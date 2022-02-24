@@ -3,24 +3,16 @@ package ru.stqa.training.selenium;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
-
-   private WebDriver driver;
-
-   @Before
-   public void start() {
-      //driver = new FirefoxDriver();
-      driver = new ChromeDriver();
-      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-   }
+public class LoginTest extends TestBase{
 
    @Test
    public void loginTest() {
@@ -30,9 +22,4 @@ public class LoginTest {
       driver.findElement(By.name("login")).click();
    }
 
-   @After
-   public void stop() {
-      driver.quit();
-      driver = null;
-   }
 }
