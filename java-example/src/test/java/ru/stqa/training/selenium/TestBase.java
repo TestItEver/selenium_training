@@ -59,9 +59,17 @@ public class TestBase {
       return driver.findElements(locator).size() > 0;
    }
 
+   public void login() {
+      driver.get("http://localhost/litecart/admin/");
+      driver.findElement(By.name("username")).sendKeys("admin");
+      driver.findElement(By.name("password")).sendKeys("admin");
+      driver.findElement(By.name("login")).click();
+   }
+
    @After
    public void stop() {
       // driver.quit();
       // driver = null;
    }
+
 }

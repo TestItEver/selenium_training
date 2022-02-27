@@ -13,42 +13,22 @@ public class AdminSiteTests extends TestBase {
    @Test
    public void testMenu() {
 
-      driver.get("http://localhost/litecart/admin/");
-      driver.findElement(By.name("username")).sendKeys("admin");
-      driver.findElement(By.name("password")).sendKeys("admin");
-      driver.findElement(By.name("login")).click();
+      login();
 
-      String[] menu = {"appearance", "catalog", "countries", "customers", "geo_zones", "languages", "modules", "orders", "pages",
-                         "reports", "settings", "slides", "tax", "translations", "users", "vqmods"};
+      List<WebElement> listMenu = driver.findElements(By.xpath("//li[@id='app-']"));
+      int s1 = listMenu.size();
 
-      for (int i=0; i<menu.length; i++) {
-         WebElement menuElement = menuFinder(menu[i]);
-         menuElement.click();
+      for (int i = 1; i<=s1; i++) {
+         driver.findElement(By.xpath("//li[@id='app-'][" + i + "]//a")).click();
          Assert.assertTrue(isElementPresent(By.xpath("//h1")));
-         System.out.println("Menu " + menu[i]);
-         System.out.println("Test for menu " + menu[i] + " is " + isElementPresent(By.xpath("//h1")));
 
-         List<WebElement> items = listFinder(menu[i]);
-         if (items.size() > 0) {
-            for (int l=1; l<=items.size(); l++){
-               itemFinder(menu[i], l).click();
+         int s2 = driver.findElements(By.xpath("//li[@id='app-'][" + i + "]/ul[@class='docs']//a")).size();
+         if (s2>0) {
+            for (int l = 1; l<=s2; l++){
+               driver.findElement(By.xpath("//li[@id='app-'][" + i + "]/ul[@class='docs']/li[" + l + "]/a")).click();
                Assert.assertTrue(isElementPresent(By.xpath("//h1")));
-               System.out.println("Test for " + l + ". item in menu " + menu[i] + " is " + isElementPresent(By.xpath("//h1")));
             }
          }
-         System.out.println("-----------------------------------------------------------------");
       }
-   }
-
-   private WebElement itemFinder(String menu, int l) {
-      return driver.findElement(By.xpath("//li[@id='app-']/a[contains(@href, '" + menu + "')]/../ul[@class='docs']/li[" + l + "]"));
-   }
-
-   private List<WebElement> listFinder(String menu) {
-      return driver.findElements(By.xpath("//li[@id='app-']/ul[@class='docs']//a[contains(@href, '" + menu + "')]"));
-   }
-
-   private WebElement menuFinder(String menu) {
-      return driver.findElement(By.xpath("//li[@id='app-']/a[contains(@href, '" + menu + "')]"));
    }
 }

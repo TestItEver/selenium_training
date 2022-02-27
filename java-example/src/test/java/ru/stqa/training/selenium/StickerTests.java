@@ -37,6 +37,6 @@ public class StickerTests extends TestBase{
          numberOfStickers = driver.findElements(By.xpath("//div[@id='box-most-popular']//li[" + i + "]//div[contains(@class, 'sticker')]")).size();
          Assert.assertEquals(1, numberOfStickers);
       }
-      
+
    }
 }
