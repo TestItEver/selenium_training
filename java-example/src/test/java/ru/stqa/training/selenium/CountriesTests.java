@@ -36,7 +36,7 @@ public class CountriesTests extends TestBase{
    }
 
    private void timeZones() {
-      String zone1 = new String("A");
+      String zone1 = new String();
       String zone2 = new String();
       int s;
       s = driver.findElements(By.xpath("//table[@id='table-zones']//tr")).size();
