@@ -12,31 +12,15 @@ public class StickerTests extends TestBase{
    @Test
    public void stickerTest() {
 
-      int numberOfProducts;
       int numberOfStickers;
 
       driver.get("http://localhost/litecart/");
+      List<WebElement> products = driver.findElements(By.xpath("//li[contains(@class, 'product')]"));
 
-      // Box-most-popular
-      numberOfProducts = driver.findElements(By.xpath("//div[@id='box-most-popular']//li")).size();
-      for (int i=1; i<=numberOfProducts; i++){
-         numberOfStickers = driver.findElements(By.xpath("//div[@id='box-most-popular']//li[" + i + "]//div[contains(@class, 'sticker')]")).size();
-         Assert.assertEquals(1, numberOfStickers);
+      for (WebElement element : products) {
+         numberOfStickers = element.findElements(By.xpath(".//div[contains(@class, 'sticker')]")).size();
+         Assert.assertTrue(numberOfStickers == 1);
       }
-
-      // Box-campaigns
-      numberOfProducts = driver.findElements(By.xpath("//div[@id='box-campaigns']//li")).size();
-      for (int i=1; i<=numberOfProducts; i++){
-         numberOfStickers = driver.findElements(By.xpath("//div[@id='box-most-popular']//li[" + i + "]//div[contains(@class, 'sticker')]")).size();
-         Assert.assertEquals(1, numberOfStickers);
-      }
-
-      // Box-latest-products
-      numberOfProducts = driver.findElements(By.xpath("//div[@id='box-latest-products']//li")).size();
-      for (int i=1; i<=numberOfProducts; i++){
-         numberOfStickers = driver.findElements(By.xpath("//div[@id='box-most-popular']//li[" + i + "]//div[contains(@class, 'sticker')]")).size();
-         Assert.assertEquals(1, numberOfStickers);
-      }
-
+      
    }
 }
