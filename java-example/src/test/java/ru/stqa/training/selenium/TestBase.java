@@ -35,10 +35,10 @@ public class TestBase {
       driver = new FirefoxDriver();
       Capabilities caps = new ImmutableCapabilities("unexpectedAlertBehaviour", "dismiss");
       System.out.println(((HasCapabilities) driver).getCapabilities());
+ */
 
       Runtime.getRuntime().addShutdownHook(
               new Thread(() -> { driver.quit(); driver = null;})); // only one shutdown after all tests
- */
 
       // Internet Explorer
       // InternetExplorerOptions options = new InternetExplorerOptions();
