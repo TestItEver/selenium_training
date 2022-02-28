@@ -12,7 +12,7 @@ public class CountriesTests extends TestBase{
    @Test
    public void testCountries() {
       int s;
-      String country1 = new String("A");
+      String country1 = new String();
       String country2 = new String();
       String zones;
 

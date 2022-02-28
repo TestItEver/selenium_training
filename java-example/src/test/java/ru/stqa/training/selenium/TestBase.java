@@ -21,7 +21,7 @@ public class TestBase {
       if (driver != null) {
          return;
       }
-/*
+
       // Chrome
       ChromeOptions options = new ChromeOptions();
       options.setBinary("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
@@ -29,7 +29,8 @@ public class TestBase {
       driver = new ChromeDriver(options);
       wait = new WebDriverWait(driver, 10);
       driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-*/
+
+/*
       // Firefox
       driver = new FirefoxDriver();
       Capabilities caps = new ImmutableCapabilities("unexpectedAlertBehaviour", "dismiss");
@@ -37,6 +38,7 @@ public class TestBase {
 
       Runtime.getRuntime().addShutdownHook(
               new Thread(() -> { driver.quit(); driver = null;})); // only one shutdown after all tests
+ */
 
       // Internet Explorer
       // InternetExplorerOptions options = new InternetExplorerOptions();
