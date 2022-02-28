@@ -1,39 +1,51 @@
 package ru.stqa.training.selenium;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+
 
 public class GeoZonesTests extends TestBase{
 
    @Test
    public void testGeoZones() {
-      String zone1 = new String();
-      String zone2 = new String();
 
       login();
       driver.findElement(By.xpath("//li[@id='app-']/a[contains(@href, 'geo_zones')]")).click();
 
-      int s = driver.findElements(By.xpath("//tr[@class='row']")).size();
-      System.out.println(s);
-
+      int s = driver.findElements(By.xpath("//table[@class='dataTable']//tr[@class='row']")).size();
       for (int i=1; i<=s; i++) {
-         List<WebElement> countries = driver.findElements(By.xpath("//tr[@class='row'][" + i + "]//td"));
+         String zone1 = new String();
+         String zone2 = new String();
+         List<WebElement> countries = driver.findElements(By.xpath("//table[@class='dataTable']//tr[@class='row'][" + i + "]/td"));
          countries.get(2).findElement(By.xpath("./a")).click();
 
-         int z = driver.findElements(By.xpath("//tr[@class='row']")).size();
-         System.out.println(z);
-
+         int z = driver.findElements(By.xpath("//table[@class='dataTable']//tr")).size();
          for (int l=2; l<z; l++) {
-            List<WebElement> zones = driver.findElements(By.xpath("//tr[@class='row'][" + l + "]//td"));
-            String name = zones.get(2).findElement(By.xpath("/select")).getAttribute("value");
-            System.out.println(name);
-         }
+            List<WebElement> zones = driver.findElements(By.xpath("//table[@class='dataTable']//tr[" + l + "]/td"));
+            String country = zones.get(1).findElement(By.xpath(".//span[@class='selection']")).getAttribute("textContent");
+            String timeZoneValue = zones.get(2).findElement(By.xpath("./select")).getAttribute("value");
 
+            if (timeZoneValue.equals("")) {
+               zone2 = country;
+            } else {
+               Select select = new Select(zones.get(2).findElement(By.xpath("./select")));
+               String timeZone = select.getFirstSelectedOption().getText();
+               zone2 = timeZone;
+            }
+
+            Assert.assertTrue(zone2.compareTo(zone1) > 0);
+            if (zone2.compareTo(zone1) < 0) {
+               System.out.println(zone1 + " " + zone2);
+            }
+            zone1 = zone2;
+         }
          driver.findElement(By.xpath("//button[@name='cancel']")).click();
+
       }
    }
-
 }
