@@ -33,9 +33,7 @@ public class GeoZonesTests extends TestBase{
             if (timeZoneValue.equals("")) {
                zone2 = country;
             } else {
-               Select select = new Select(zones.get(2).findElement(By.xpath("./select")));
-               String timeZone = select.getFirstSelectedOption().getText();
-               zone2 = timeZone;
+               zone2 = zones.get(2).findElement(By.xpath(".//option[@selected='selected']")).getText();
             }
 
             Assert.assertTrue(zone2.compareTo(zone1) > 0);
