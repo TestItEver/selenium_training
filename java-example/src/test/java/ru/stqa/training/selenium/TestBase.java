@@ -30,12 +30,12 @@ public class TestBase {
       wait = new WebDriverWait(driver, 10);
       driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
-/*
+      /*
       // Firefox
       driver = new FirefoxDriver();
       Capabilities caps = new ImmutableCapabilities("unexpectedAlertBehaviour", "dismiss");
-      System.out.println(((HasCapabilities) driver).getCapabilities());
- */
+      // System.out.println(((HasCapabilities) driver).getCapabilities());
+      */
 
       Runtime.getRuntime().addShutdownHook(
               new Thread(() -> { driver.quit(); driver = null;})); // only one shutdown after all tests
